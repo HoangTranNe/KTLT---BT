@@ -1,135 +1,73 @@
-﻿using System.Reflection.Metadata;
-using System.Xml;
-
-namespace Bài_4;
-
-public class Class1
+﻿using System;
+class program
 {
-    static void NhapMang(int[,] a)
+    static void Input(out int[] a)
     {
-        for (int i = 0; i < a.GetLength(0); i++)
+        Console.WriteLine("vui long nhap day so: ");
+        int n = int.Parse(Console.ReadLine());
+        a = new int [n];
+        for(int i = 0; i < a.Length; i++)
         {
-            for (int j = 0; j < a.GetLength(1); j++)
+            for(int j = 0; j<a.Length; j++)
             {
-                Console.Write($"a[{i},{j}] = ");
-                a[i, j] = int.Parse(Console.ReadLine());
+                Console.Write($"Phan tu thu {i} = ");
+                a[i] = int.Parse(Console.ReadLine());
+            }
+        }
+        for(int i = 0; i < a.Length; i++)
+        {
+            for(int j = 0; i<a.Length; j++)
+            {
+                Console.Write($"a = {i}");
+                Console.ReadLine();
+            }
+        }
+        Console.ReadLine();
+    }
+    static bool IsPrime(int x)
+    {
+        int m = 0;
+        for (int i = 1; i <= x; i++)
+        {
+            if (x % i == 0)
+            {
+                m++;
+                return false;
+            }
+        }
+        return true;
+    }
+    static List<int> FindAllPrime(int[] a)
+    {
+        Input(out a);
+        List<int> result = new List<int>();
+        result.Count();
+        Console.WriteLine(result);
+        return result;
+    }
+    static void InterchangeSort(List<int> intList)
+    {
+        int[] a = new int[intList.Count];
+        for (int i = 0; i < a.Length - 1; i++)
+        {
+            for (int j = i + 1; j < a.Length; j++)
+            {
+                if (a[i] > a[j])
+                {
+                    int temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                }
             }
             Console.WriteLine();
         }
     }
-
-    static int SumR(int[,] a, int k)
+    static void Main(string[] args)
     {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (k == i)
-                {
-                    sum += a[k, j];
-                }
-            }
-        }
-
-        return sum;
+        int[] a;
+        Input(out a);
+        List<int> primeNumbers = FindAllPrime(a);
+        if (primeNumbers.Count > 0)
+            InterchangeSort(primeNumbers);
     }
-
-    static int SumC(int[,] a, int k)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (k == j)
-                {
-                    sum += a[k, i];
-                }
-            }
-        }
-
-        return sum;
-    }
-
-    static int Suma(int[,] a)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                sum += a[i, j];
-            }
-        }
-
-        return sum;
-    }
-
-    static int SumChan(int[,] a)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (a[i, j] / 2 == 0)
-                {
-                    sum += a[i, j];
-                }
-                else Console.Write("invalid result!");
-            }
-        }
-
-        return sum;
-    }
-    static int SumLe(int[,] a)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (a[i, j] / 2 != 0)
-                {
-                    sum += a[i, j];
-                }
-                else Console.Write("invalid result!");
-            }
-        }
-
-        return sum;
-    }
-
-    static int TrungBinh(int[,] a)
-    {
-        int sum = 0;
-        int average = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                sum += a[i,j];
-                average = sum / a.Length;
-            }
-        }
-
-        return average;
-    }
-    static void Main()
-    {
-        Console.Write("nhap m,n,k = ");
-        string[] token = Console.ReadLine().Split();
-        int m = int.Parse(token[0]);
-        int n = int.Parse(token[1]);
-        int k = int.Parse(token[2]);
-        int[,] a = new int [m, n];
-        NhapMang(a);
-        Console.WriteLine($"tong cac phan tu o dong {k} la : {SumR(a,k)}");
-        Console.WriteLine($"tong cac phan tu o cot  {k} la : {SumC(a,k)}");
-        Console.WriteLine($"tong cac phan tu o trong a la  : {Suma(a)}");
-        Console.WriteLine($"tong cac phan tu so chan trong a la : {SumChan(a)}");
-        Console.WriteLine($"tong cac phan tu so le trong a la : {SumLe(a)}");
-        Console.WriteLine($"trung binh cac phan tu trong a la : {TrungBinh(a)}");
-    }
-}
+} 
