@@ -1,0 +1,151 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+--person
+namespace Bai_1
+{
+    class person
+    {
+        private string name;
+        private int birthYear;
+        private string address;
+
+        public person() { }
+        public person(string name, int birthYear, string address)
+        {
+            this.address = address;
+            this.birthYear = birthYear;
+            this.name = name;
+        }
+        public virtual void input()
+        {
+            Console.Write("Nhap ten cua nhan vien: ");
+            name = Console.ReadLine();
+            Console.Write("Nhap ngay sinh cua nhan vien: ");
+            birthYear = int.Parse(Console.ReadLine());
+            Console.Write("Nhap dia chi cua nhan vien: ");
+            address = Console.ReadLine();
+        }
+        public int GetAge()
+        {
+            DateTime now = DateTime.Today;
+            return now.Year - birthYear;
+        }
+        public override string ToString()
+        {
+            string s = "";
+            s = $"Person[name:{this.name}, Age = {GetAge()}, Address = {this.address}";
+            return s;
+        }
+    }
+}
+
+--student
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Bai_1
+{
+    class student:person
+    {
+        private string program;
+        private int year;
+
+        public student() { }
+        public student (string name, int birthYear, string address,string program, int year): base (name,birthYear,address)
+        {
+            this.program = program;
+            this.year = year;
+        }
+        public override void input()
+        {
+            base.input();
+            Console.Write("Chuong trinh: ");
+            program = Console.ReadLine();
+            Console.Write("Nam: ");
+            year = int.Parse(Console.ReadLine());
+        }
+        public override string ToString()
+        {
+            string baseinfo1 = base.ToString();
+            return baseinfo1 + $"Program: {program}, Year: {year}";
+        }
+        public void changeprogram(string program)
+        {
+            Console.Write("Change Program: ");
+            program = Console.ReadLine();
+            this.program = program;
+        }
+    }
+}
+
+
+--staff
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Bai_1
+{
+    class staff:person
+    {
+        private string department;
+        private double salary;
+
+        public staff() { }
+        public staff(string name, int birthYear, string address, string department, double salary): base(name, birthYear,address)
+        {
+            this.department = department;
+            this.salary = salary;
+        }
+        public override void input()
+        {
+            base.input();
+            Console.Write("Khoa : ");
+            department = Console.ReadLine();
+            Console.Write("Luong: ");
+            salary = Convert.ToDouble(Console.ReadLine());
+        }
+        public override string ToString()
+        {
+            string baseinfo2 = base.ToString();
+            return baseinfo2 + $"Department: {department}, Salary: {salary}";
+        }
+        public void updatesalary(double salary)
+        {
+            Console.Write("Salary: ");
+            salary = Convert.ToDouble(Console.ReadLine());
+            this.salary = salary;
+        }
+    }
+}
+ 
+ 
+ -- main
+ using System;
+
+namespace Bai_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            person hoang = new person();
+            student bao = new student();
+            staff tran = new staff();
+
+            hoang.input();
+            bao.input();
+            tran.input();
+
+            hoang.GetAge();
+
+            Console.WriteLine(hoang);
+            Console.WriteLine(bao);
+            Console.WriteLine(tran);
+            Console.ReadKey();
+        }
+    }
+}
