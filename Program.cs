@@ -1,135 +1,25 @@
-﻿using System.Reflection.Metadata;
-using System.Xml;
+﻿using System;
 
-namespace Bài_4;
-
-public class Class1
+namespace Bai_1
 {
-    static void NhapMang(int[,] a)
+    class Program
     {
-        for (int i = 0; i < a.GetLength(0); i++)
+        static void Main(string[] args)
         {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                Console.Write($"a[{i},{j}] = ");
-                a[i, j] = int.Parse(Console.ReadLine());
-            }
-            Console.WriteLine();
+            person hoang = new person();
+            student bao = new student();
+            staff tran = new staff();
+
+            hoang.input();
+            bao.input();
+            tran.input();
+
+            hoang.GetAge();
+
+            Console.WriteLine(hoang);
+            Console.WriteLine(bao);
+            Console.WriteLine(tran);
+            Console.ReadKey();
         }
-    }
-
-    static int SumR(int[,] a, int k)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (k == i)
-                {
-                    sum += a[k, j];
-                }
-            }
-        }
-
-        return sum;
-    }
-
-    static int SumC(int[,] a, int k)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (k == j)
-                {
-                    sum += a[k, i];
-                }
-            }
-        }
-
-        return sum;
-    }
-
-    static int Suma(int[,] a)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                sum += a[i, j];
-            }
-        }
-
-        return sum;
-    }
-
-    static int SumChan(int[,] a)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (a[i, j] / 2 == 0)
-                {
-                    sum += a[i, j];
-                }
-                else Console.Write("invalid result!");
-            }
-        }
-
-        return sum;
-    }
-    static int SumLe(int[,] a)
-    {
-        int sum = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                if (a[i, j] / 2 != 0)
-                {
-                    sum += a[i, j];
-                }
-                else Console.Write("invalid result!");
-            }
-        }
-
-        return sum;
-    }
-
-    static int TrungBinh(int[,] a)
-    {
-        int sum = 0;
-        int average = 0;
-        for (int i = 0; i < a.GetLength(0); i++)
-        {
-            for (int j = 0; j < a.GetLength(1); j++)
-            {
-                sum += a[i,j];
-                average = sum / a.Length;
-            }
-        }
-
-        return average;
-    }
-    static void Main()
-    {
-        Console.Write("nhap m,n,k = ");
-        string[] token = Console.ReadLine().Split();
-        int m = int.Parse(token[0]);
-        int n = int.Parse(token[1]);
-        int k = int.Parse(token[2]);
-        int[,] a = new int [m, n];
-        NhapMang(a);
-        Console.WriteLine($"tong cac phan tu o dong {k} la : {SumR(a,k)}");
-        Console.WriteLine($"tong cac phan tu o cot  {k} la : {SumC(a,k)}");
-        Console.WriteLine($"tong cac phan tu o trong a la  : {Suma(a)}");
-        Console.WriteLine($"tong cac phan tu so chan trong a la : {SumChan(a)}");
-        Console.WriteLine($"tong cac phan tu so le trong a la : {SumLe(a)}");
-        Console.WriteLine($"trung binh cac phan tu trong a la : {TrungBinh(a)}");
     }
 }
